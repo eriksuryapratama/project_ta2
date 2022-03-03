@@ -25,18 +25,17 @@
     <title>Admin</title>
 </head>
 <body id="page-top" style="background-color:#5b7d87">
-    @yield('konten1')
 
+    @yield('konten1')
 
     {{-- JS SideBar --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/scripts.js') }}"></script>
 
-    
-
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
     {{-- JS Datatables --}}
     <script>
         $(document).ready(function() {
