@@ -23,27 +23,27 @@
                             @csrf
                             <div class="form-floating mb-3">
                                 <label for="" style="color: white">Nama Lengkap</label>
-                                <input type="text" name="nama_customer" class="form-control" id="" placeholder="Masukkan nama anda...">
+                                <input type="text" name="nama" class="form-control" id="" placeholder="Masukkan nama anda...">
                             </div>
 
                             <div class="form-floating mb-3">
                                 <label for="" style="color: white">Alamat</label>
-                                <input type="text" name="alamat_customer" class="form-control" id="" placeholder="Masukkan alamat anda...">
+                                <input type="text" name="alamat" class="form-control" id="" placeholder="Masukkan alamat anda...">
                             </div>
 
                             <div class="form-floating mb-3">
                                 <label for="" style="color: white">Telepon</label>
-                                <input type="text" name="telepon_customer" class="form-control" id="" placeholder="Masukkan telepon anda...">
+                                <input type="text" name="telepon" class="form-control" id="" placeholder="Masukkan telepon anda...">
                             </div>
 
                             <div class="form-floating mb-3">
                                 <label for="" style="color: white">Email</label>
-                                <input type="text" name="email_customer" class="form-control" id="" placeholder="Masukkan email anda...">
+                                <input type="text" name="email" class="form-control" id="" placeholder="Masukkan email anda...">
                             </div>
 
                             <div class="form-floating mb-3">
                                 <label for="" style="color: white">Username</label>
-                                <input type="text" name="username_customer" class="form-control" id="" placeholder="Masukkan username anda...">
+                                <input type="text" name="username" class="form-control" id="" placeholder="Masukkan username anda...">
                             </div>
 
                             <div class="form-floating mb-3">

@@ -55,9 +55,10 @@
                 </div>
             </div>
         </nav>
+
         <!-- Page content-->
         <div class="container-fluid">
-            <br><br>
+            <br>
 
             <div class="container" style="background-color: white; padding:20px;">
 
@@ -70,85 +71,129 @@
 
                 <br>
 
-                {{-- BUTTON TAMBAH --}}
+                {{-- HEADER KONTEN --}}
                 <div class="container">
                     <div class="row justify-content-between">
                         <div class="col-4">
                             <h4 style="text-align: left;font-family: 'Langar', cursive;font-family: 'Russo One', sans-serif;">List Teknisi</h4>
                         </div>
                         <div class="col-2">
-                            <a href="/admin/pegawai"><button type="button" class="btn btn-success">Tambah Teknisi</button></a>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Teknisi</button>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- MODAL TAMBAH --}}
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Teknisi</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body" style="padding:40px 50px;">
+                                <form action="/admin/teknisi" method="POST">
+                                    @csrf
+                                    <!-- NAMA TEKNISI -->
+                                    <div class="form-group">
+                                        <label for="">Nama Lengkap</label>
+                                        <input type="text"  name="nama_teknisi" class="form-control" placeholder="Masukkan nama lengkap...">
+                                    </div>
+
+                                    <!-- ALAMAT TEKNISI -->
+                                    <div class="form-group">
+                                        <label for="">Alamat</label>
+                                        <input type="text"  name="alamat_teknisi" class="form-control" placeholder="Masukkan alamat teknisi...">
+                                    </div>
+
+                                    <!-- TELEPON TEKNISI -->
+                                    <div class="form-group">
+                                        <label for="">Telepon</label>
+                                        <input type="text" name="telepon_teknisi" class="form-control" placeholder="Masukkan telepon teknisi...">
+                                    </div>
+
+                                    <!-- EMAIL TEKNISI -->
+                                    <div class="form-group">
+                                        <label for="">Email</label>
+                                        <input type="text" name="email_teknisi" class="form-control" placeholder="Masukkan email teknisi...">
+                                    </div>
+
+                                    <!-- USERNAME TEKNISI -->
+                                    <div class="form-group">
+                                        <label for="">Username</label>
+                                        <input type="text" name="username_teknisi" class="form-control" placeholder="Masukkan username teknisi...">
+                                    </div>
+
+                                    <!-- PASSWORD TEKNISI -->
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label for="">Password</label>
+                                            <input type="password" name="password" class="form-control" placeholder="Password...">
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label for="">Konfirmasi Password</label>
+                                            <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password...">
+                                        </div>
+                                    </div>
+
+                                    {{-- TOMBOL REGISTER --}}
+                                    <input type="submit" class="btn btn-success btn-block" value="Daftarkan Akun" name="btn_regis">
+
+                                </form>
+
+                                {{-- Pesan eror --}}
+                                @if ($errors->any())
+                                    <ul style="color:red;">
+                                        @foreach ($errors->all() as $err)
+                                            <li>{{ $err }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <br>
 
-                {{-- FORM SEARCH --}}
-                <form action="/admin/caripegawai" method="GET">
-                    <select name="kategori">
-                        <option value="" disabled selected>-- Cari menurut --</option>
-                        <option value="snama">Nama Pegawai</option>
-                        <option value="stelepon">Nomor Telepon</option>
-                    </select>
-
-                    <br><br>
-
-                    <input type="text" name="cari" placeholder="Search.." value="{{ old('cari') }}">
-                    <input type="submit" class="btn btn-info" value="Cari">
-                </form>
-
-                <br>
-
-                {{-- TABEL PEGAWAI --}}
-                <table id="table" class="table table-striped table-bordered" style="width:100%">
+                <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th style="text-align:center">No.</th>
-                            <th style="text-align:center;">Kode</th>
-                            <th style="text-align:center;">Nama</th>
-                            <th style="text-align:center;">Alamat</th>
-                            <th style="text-align:center;">Telepon</th>
-                            <th style="text-align:center;">Email</th>
-                            <th style="text-align:center;">Username</th>
-                            <th style="text-align:center;" colspan="2">Aksi</th>
+                            <th>No.</th>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Alamat</th>
+                            <th>Telepon</th>
+                            <th>Email</th>
+                            <th>Username</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>T0001</td>
-                            <td>Erik Surya Pratama</td>
-                            <td>Pondok Wage Indah 2</td>
-                            <td>081329761969</td>
-                            <td>eriksuryapratama@gmail.com</td>
-                            <td>spxrick</td>
-                            <td style="text-align:center"><a href=""><button type="button" class="btn btn-warning">Edit</button></a></td>
-                            <td style="text-align:center"><a href=""><button type="button" class="btn btn-danger">Hapus</button></a></td>
-                        </tr>
-
-                        {{-- @if (null != $result)
+                        @if (null != $result)
                             @foreach ($result as $item)
                                 <tr>
                                     <td style="text-align:center">{{$loop ->index + 1}}</td>
-                                    <td style="text-align:center">{{ $item->kode_pegawai }}</td>
-                                    <td>{{ $item->nama_pegawai }}</td>
-                                    <td style="text-align:center">{{ $item->telepon }}</td>
-                                    <td>{{ $item->username }}</td>
-                                    <td style="text-align:center"><a href="{{ url("/admin/pegawai/update/$item->id") }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
-                                    <td style="text-align:center"><a href="{{ url("/admin/pegawai/delete/$item->id") }}"><button type="button" class="btn btn-danger">Hapus</button></a></td>
+                                    <td style="text-align:center">{{ $item->kode_teknisi }}</td>
+                                    <td>{{ $item->nama_teknisi }}</td>
+                                    <td>{{ $item->alamat_teknisi }}</td>
+                                    <td  style="text-align:center">{{ $item->telepon_teknisi }}</td>
+                                    <td>{{ $item->email_teknisi }}</td>
+                                    <td>{{ $item->username_teknisi }}</td>
                                 </tr>
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6">Tidak ada daftar Pegawai</td>
+                                <td colspan="6">Tidak ada daftar </td>
                             </tr>
-                        @endif --}}
+                        @endif
                     </tbody>
                 </table>
             </div>
+            <br>
         </div>
     </div>
 </div>
+
 @endsection

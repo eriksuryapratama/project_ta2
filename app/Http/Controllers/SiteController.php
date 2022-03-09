@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Users;
 use App\Rules\CekAlamat;
 use App\Rules\CekAngka;
 use App\Rules\CekUsernameCustomer;
@@ -34,15 +35,16 @@ class SiteController extends Controller
         return view('fitur_website.register');
     }
 
+    //FUNGSI UNTUK MELAKUKAN REGISTER DATA CUSTOMER
     public function do_register(Request $request)
     {
         //RULES
         $rules = [
-            'nama_customer' => 'required',
-            'alamat_customer' => ['required', new CekAlamat()],
-            'telepon_customer' => ['required', 'min:10', new CekAngka()],
-            'email_customer' => 'required | email',
-            'username_customer' => ['required', 'regex:/^\S*$/u', new CekUsernameCustomer()],
+            'nama' => 'required',
+            'alamat' => ['required', new CekAlamat()],
+            'telepon' => ['required', 'min:10', new CekAngka()],
+            'email' => 'required | email',
+            'username' => ['required', 'max:50', 'regex:/^\S*$/u', new CekUsernameCustomer()],
             'password' => 'required | confirmed',
             'password_confirmation' => 'required'
         ];
@@ -51,6 +53,7 @@ class SiteController extends Controller
         $custom_msg = [
             'required' => ':attribute harus diisi !',
             'min' => ':attribute minimal 10 angka',
+            'max' => ':attribute maksimal 50 huruf',
             'confirmed' => 'password dan confirm password harus sama !',
             'regex' => ':attribute tidak boleh menggunakan spasi !',
             'email' => ':attribute harus sesuai format !'
@@ -59,15 +62,29 @@ class SiteController extends Controller
         //VALIDASI
         $this->validate($request, $rules, $custom_msg);
 
-        //KODE PEGAWAI
-        $jum = Customer::select(DB::raw('count(*) as nama_customer'))->first();
-        $kd_customer = "C".str_pad((intval($jum->nama_customer) + 1),4,"0",STR_PAD_LEFT);
+        //KODE CUSTOMER
+        $jum = Users::select(DB::raw('count(*) as nama_users'))->first();
+        $kd_customer = "C".str_pad((intval($jum->nama_users) + 1),4,"0",STR_PAD_LEFT);
+
+        //STATUS CUSTOMER
+        $status = "customer";
+
+        //PASSWORD
+        $password = Hash::make($request->password);
 
         //INPUT KE DATABASE
-        $data = $request->all();
-        $data['kode_customer'] = $kd_customer;
-        $data['password_customer'] = Hash::make($data['password']);
-        Customer::create($data);
+        $data = Users::create(
+            [
+                "kode_users" => $kd_customer,
+                "nama_users" => $request -> nama,
+                "alamat_users" => $request -> alamat,
+                "telepon_users" => $request -> telepon,
+                "email_users" => $request -> email,
+                "status_users" => $status,
+                "username_users" => $request -> username,
+                "password_users" => $password
+            ]
+        );
 
         //ROUTING
         if($data){

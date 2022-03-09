@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 ////////////////////////////////////////////////////////////////////////////////////
 //-------------------------- KUMPULAN ROUTES WEBSITE -----------------------------//
 ////////////////////////////////////////////////////////////////////////////////////
@@ -48,6 +49,8 @@ Route::prefix('admin')->group(function () {
 
     //DATA TEKNISI
     Route::get('/datateknisi' , [AdminController::class, 'datateknisi']);
+    // Route::get('/teknisi' , [AdminController::class, 'form_teknisi']);
+    Route::post('/teknisi' , [AdminController::class, 'tambah_teknisi']);
 
     //DATA CUSTOMER
     Route::get('/datacustomer' , [AdminController::class, 'datacustomer']);

@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
-class CekUsernameCustomer implements Rule
+class CekUsernameAdmin implements Rule
 {
     /**
      * Create a new rule instance.
@@ -26,10 +26,10 @@ class CekUsernameCustomer implements Rule
      */
     public function passes($attribute, $value)
     {
-        //ATURAN USERNAME CUSTOMER SAMA
-        $cekuser = DB::select('select username_customer from customer');
+        //ATURAN USERNAME ADMIN SAMA
+        $cekuser = DB::select('select username_admin from admin');
         foreach ($cekuser as $user) {
-            if($value == $user->username_customer){
+            if($value == $user->username_admin){
                 return false;
             }
         }
