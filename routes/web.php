@@ -48,9 +48,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/dashboard' , [AdminController::class, 'dashboard']);
 
     //DATA TEKNISI
-    Route::get('/datateknisi' , [AdminController::class, 'datateknisi']);
-    // Route::get('/teknisi' , [AdminController::class, 'form_teknisi']);
-    Route::post('/teknisi' , [AdminController::class, 'tambah_teknisi']);
+    Route::get('/datakaryawan' , [AdminController::class, 'datakaryawan']);
+    Route::post('/karyawan' , [AdminController::class, 'tambah_karyawan']);
 
     //DATA CUSTOMER
     Route::get('/datacustomer' , [AdminController::class, 'datacustomer']);

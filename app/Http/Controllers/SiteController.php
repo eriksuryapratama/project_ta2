@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
 use App\Models\Users;
 use App\Rules\CekAlamat;
 use App\Rules\CekAngka;
-use App\Rules\CekUsernameCustomer;
+use App\Rules\CekUsernameKembar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +22,26 @@ class SiteController extends Controller
         return view('fitur_website.login');
     }
 
+    //FUNGSI UNTUK MENAMPILKAN HALAMAN LOGIN
+    public function do_login(Request $request)
+    {
+        //RULES
+        $rules = [
+            'email' => 'required | email',
+            'password' => 'required'
+        ];
+
+        //ERROR MESSAGE
+        $custom_msg = [
+            'required' => ':attribute harus diisi !',
+            'email' => ':attribute harus sesuai format !'
+        ];
+
+        //VALIDASI
+        $this->validate($request, $rules, $custom_msg);
+
+        $data = Users::all();
+    }
 
 
     /////////////////////////////////////////////////////////////////////////////
@@ -44,7 +63,7 @@ class SiteController extends Controller
             'alamat' => ['required', new CekAlamat()],
             'telepon' => ['required', 'min:10', new CekAngka()],
             'email' => 'required | email',
-            'username' => ['required', 'max:50', 'regex:/^\S*$/u', new CekUsernameCustomer()],
+            'username' => ['required', 'max:50', 'regex:/^\S*$/u', new CekUsernameKembar()],
             'password' => 'required | confirmed',
             'password_confirmation' => 'required'
         ];

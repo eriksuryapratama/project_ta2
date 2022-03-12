@@ -22,8 +22,8 @@
                         <form action="/login" method="POST">
                             @csrf
                             <div class="form-floating mb-3">
-                                <label for="" style="color: white">Username</label>
-                                <input type="text" name="username" class="form-control" id="" placeholder="Enter your username...">
+                                <label for="" style="color: white">Email</label>
+                                <input type="text" name="email" class="form-control" id="" placeholder="Enter your email...">
                             </div>
 
                             <div class="form-floating mb-3">

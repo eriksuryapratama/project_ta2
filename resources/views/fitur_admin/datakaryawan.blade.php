@@ -11,8 +11,7 @@
             <p style="font-size: 14px;">Selamat datang di dashboard anda</p>
         </div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/dashboard">Dashboard</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datateknisi">Data Teknisi</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datakaryawan">Data Karyawan</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datacustomer">Data Customer</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data Konsultasi</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data Booking Service</a>
@@ -75,10 +74,10 @@
                 <div class="container">
                     <div class="row justify-content-between">
                         <div class="col-4">
-                            <h4 style="text-align: left;font-family: 'Langar', cursive;font-family: 'Russo One', sans-serif;">List Teknisi</h4>
+                            <h4 style="text-align: left;font-family: 'Langar', cursive;font-family: 'Russo One', sans-serif;">List Karyawan</h4>
                         </div>
                         <div class="col-2">
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Teknisi</button>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Tambah Data</button>
                         </div>
                     </div>
                 </div>
@@ -88,41 +87,51 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Teknisi</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Karyawan</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body" style="padding:40px 50px;">
-                                <form action="/admin/teknisi" method="POST">
+                                <form action="/admin/karyawan" method="POST">
                                     @csrf
                                     <!-- NAMA TEKNISI -->
                                     <div class="form-group">
                                         <label for="">Nama Lengkap</label>
-                                        <input type="text"  name="nama_teknisi" class="form-control" placeholder="Masukkan nama lengkap...">
+                                        <input type="text"  name="nama" class="form-control" placeholder="Masukkan nama lengkap...">
                                     </div>
 
                                     <!-- ALAMAT TEKNISI -->
                                     <div class="form-group">
                                         <label for="">Alamat</label>
-                                        <input type="text"  name="alamat_teknisi" class="form-control" placeholder="Masukkan alamat teknisi...">
+                                        <input type="text"  name="alamat" class="form-control" placeholder="Masukkan alamat teknisi...">
                                     </div>
 
                                     <!-- TELEPON TEKNISI -->
                                     <div class="form-group">
                                         <label for="">Telepon</label>
-                                        <input type="text" name="telepon_teknisi" class="form-control" placeholder="Masukkan telepon teknisi...">
+                                        <input type="text" name="telepon" class="form-control" placeholder="Masukkan telepon teknisi...">
                                     </div>
 
                                     <!-- EMAIL TEKNISI -->
                                     <div class="form-group">
                                         <label for="">Email</label>
-                                        <input type="text" name="email_teknisi" class="form-control" placeholder="Masukkan email teknisi...">
+                                        <input type="text" name="email" class="form-control" placeholder="Masukkan email teknisi...">
                                     </div>
+
+                                    <!-- STATUS TEKNISI -->
+                                    <div class="form-group">
+                                        <label for="">Status User</label>
+                                        <select name="status" class="form-control" id="">
+                                            <option value="" disabled selected>-- Pilih Status --</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="teknisi">Teknisi</option>
+                                        </select>
+                                      </div>
 
                                     <!-- USERNAME TEKNISI -->
                                     <div class="form-group">
                                         <label for="">Username</label>
-                                        <input type="text" name="username_teknisi" class="form-control" placeholder="Masukkan username teknisi...">
+                                        <input type="text" name="username" class="form-control" placeholder="Masukkan username teknisi...">
                                     </div>
 
                                     <!-- PASSWORD TEKNISI -->
@@ -167,6 +176,7 @@
                             <th>Alamat</th>
                             <th>Telepon</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th>Username</th>
                         </tr>
                     </thead>
@@ -175,12 +185,13 @@
                             @foreach ($result as $item)
                                 <tr>
                                     <td style="text-align:center">{{$loop ->index + 1}}</td>
-                                    <td style="text-align:center">{{ $item->kode_teknisi }}</td>
-                                    <td>{{ $item->nama_teknisi }}</td>
-                                    <td>{{ $item->alamat_teknisi }}</td>
-                                    <td  style="text-align:center">{{ $item->telepon_teknisi }}</td>
-                                    <td>{{ $item->email_teknisi }}</td>
-                                    <td>{{ $item->username_teknisi }}</td>
+                                    <td style="text-align:center">{{ $item->kode_users }}</td>
+                                    <td>{{ $item->nama_users }}</td>
+                                    <td>{{ $item->alamat_users }}</td>
+                                    <td  style="text-align:center">{{ $item->telepon_users }}</td>
+                                    <td>{{ $item->email_users }}</td>
+                                    <td>{{ $item->status_users }}</td>
+                                    <td>{{ $item->username_users }}</td>
                                 </tr>
                             @endforeach
                         @else

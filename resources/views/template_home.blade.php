@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style2.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('js/bootstrap.min.js') }}">
@@ -16,7 +18,7 @@
 
     <title>Home</title>
 </head>
-<body style="background-color:#5b7d87">
+<body id="page-top" style="background-color:#5b7d87">
 
     @include('template_headerWeb')
 

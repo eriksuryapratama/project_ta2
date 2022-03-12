@@ -11,8 +11,7 @@
             <p style="font-size: 14px;">Selamat datang di dashboard anda</p>
         </div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/dashboard">Dashboard</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datateknisi">Data Teknisi</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datakaryawan">Data Karyawan</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datacustomer">Data Customer</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data Konsultasi</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data Booking Service</a>
@@ -99,12 +98,12 @@
                             @foreach ($result as $item)
                                 <tr>
                                     <td style="text-align:center">{{$loop ->index + 1}}</td>
-                                    <td style="text-align:center">{{ $item->kode_customer }}</td>
-                                    <td>{{ $item->nama_customer }}</td>
-                                    <td>{{ $item->alamat_customer }}</td>
-                                    <td  style="text-align:center">{{ $item->telepon_customer }}</td>
-                                    <td>{{ $item->email_customer }}</td>
-                                    <td>{{ $item->username_customer }}</td>
+                                    <td style="text-align:center">{{ $item->kode_users }}</td>
+                                    <td>{{ $item->nama_users }}</td>
+                                    <td>{{ $item->alamat_users }}</td>
+                                    <td  style="text-align:center">{{ $item->telepon_users }}</td>
+                                    <td>{{ $item->email_users }}</td>
+                                    <td>{{ $item->username_users }}</td>
                                 </tr>
                             @endforeach
                         @else

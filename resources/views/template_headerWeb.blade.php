@@ -2,8 +2,6 @@
 <header>
     <nav class="navbar navbar fixed-top navbar-expand-lg navbar-light bg-light">
         {{-- Navbar --}}
-
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Teknisi;
+use App\Models\Users;
 use App\Rules\CekAlamat;
 use App\Rules\CekAngka;
 use App\Rules\CekUsernameAdmin;
+use App\Rules\CekUsernameKembar;
 use App\Rules\CekUsernameTeknisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,31 +30,26 @@ class AdminController extends Controller
     ////                       TEKNISI                                       ////
     /////////////////////////////////////////////////////////////////////////////
 
-    //FUNGSI UNTUK MENAMPILKAN DATA TEKNISI
-    public function datateknisi()
+    //FUNGSI UNTUK MENAMPILKAN DATA KARYAWAN
+    public function datakaryawan()
     {
-        $result = Teknisi::all();
+        $result = Users::where('status_users','admin')->orWhere('status_users','teknisi')->get();
         $param = [];
         $param['result'] = $result;
-        return view('fitur_admin.datateknisi', $param);
-    }
-
-    //FUNGSI UNTUK MENAMPILKAN FORM TAMBAH TEKNISI
-    public function form_teknisi()
-    {
-        return view('fitur_admin.tambah_teknisi');
+        return view('fitur_admin.datakaryawan', $param);
     }
 
     //FUNGSI TAMBAH TEKNISI
-    public function tambah_teknisi(Request $request)
+    public function tambah_karyawan(Request $request)
     {
         //RULES
         $rules = [
-            'nama_teknisi' => 'required',
-            'alamat_teknisi' => ['required', new CekAlamat],
-            'telepon_teknisi' => ['required', 'min:10', new CekAngka],
-            'email_teknisi' => 'required | email',
-            'username_teknisi' => ['required', 'max:50', 'regex:/^\S*$/u', new CekUsernameTeknisi],
+            'nama' => 'required',
+            'alamat' => ['required', new CekAlamat],
+            'telepon' => ['required', 'min:10', new CekAngka],
+            'email' => 'required | email',
+            'status' => 'required',
+            'username' => ['required', 'max:50', 'regex:/^\S*$/u', new CekUsernameKembar],
             'password' => 'required | confirmed',
             'password_confirmation' => 'required'
         ];
@@ -70,21 +67,42 @@ class AdminController extends Controller
         //VALIDASI
         $this->validate($request, $rules, $custom_msg);
 
-        //KODE TEKNISI
-        $jum = Teknisi::select(DB::raw('count(*) as nama_teknisi'))->first();
-        $kd_customer = "T".str_pad((intval($jum->nama_teknisi) + 1),4,"0",STR_PAD_LEFT);
+        //KODE KARYAWAN
+        if($request->status == "admin"){
+            $jum = Users::select(DB::raw('count(*) as nama_users'))->first();
+            $kd_karyawan = "A".str_pad((intval($jum->nama_users) + 1),4,"0",STR_PAD_LEFT);
+        }
+
+        if($request->status == "teknisi"){
+            $jum = Users::select(DB::raw('count(*) as nama_users'))->first();
+            $kd_karyawan = "T".str_pad((intval($jum->nama_users) + 1),4,"0",STR_PAD_LEFT);
+        }
+
+        //STATUS CUSTOMER
+        $status = $request->status;
+
+        //PASSWORD
+        $password = Hash::make($request->password);
 
         //INPUT KE DATABASE
-        $data = $request->all();
-        $data['kode_teknisi'] = $kd_customer;
-        $data['password_teknisi'] = Hash::make($data['password']);
-        Teknisi::create($data);
+        $data = Users::create(
+            [
+                "kode_users" => $kd_karyawan,
+                "nama_users" => $request -> nama,
+                "alamat_users" => $request -> alamat,
+                "telepon_users" => $request -> telepon,
+                "email_users" => $request -> email,
+                "status_users" => $status,
+                "username_users" => $request -> username,
+                "password_users" => $password
+            ]
+        );
 
         //ROUTING
         if($data){
-            return redirect('/admin/datateknisi')->with('message', 'Sukses mendaftarkan akun');
+            return redirect('/admin/datakaryawan')->with('message', 'Sukses mendaftarkan akun');
         }else {
-            return redirect('/admin/datateknisi')->with('message', 'Gagal mendaftarkan akun');
+            return redirect('/admin/datakaryawan')->with('message', 'Gagal mendaftarkan akun');
         }
     }
 
@@ -96,12 +114,10 @@ class AdminController extends Controller
     //FUNGSI UNTUK MENAMPILKAN DATA CUSTOMER
     public function datacustomer()
     {
-        $result = Customer::all();
+        $result = Users::where('status_users','customer')->get();
+
         $param = [];
         $param['result'] = $result;
         return view('fitur_admin.datacustomer', $param);
     }
-
-
-
 }

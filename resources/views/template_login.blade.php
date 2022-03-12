@@ -17,14 +17,8 @@
     <title>Login</title>
 </head>
 <body style="background-color:#5b7d87">
-    @include('template_headerWeb')
-
-    <br><br><br>
 
     @yield('konten')
 
-    <br><br><br>
-
-    @include('template_footerWeb')
 </body>
 </html>

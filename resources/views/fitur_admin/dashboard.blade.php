@@ -10,8 +10,7 @@
             <h5>Halo, Erik Surya Pratama</h5>
         </div>
         <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/dashboard">Dashboard</a>
-            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datateknisi">Data Teknisi</a>
+            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datakaryawan">Data Teknisi</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/admin/datacustomer">Data Customer</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data Konsultasi</a>
             <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data Booking Service</a>
